@@ -3,6 +3,8 @@ LD=ld
 LDFILE=solrex_x86.ld
 OBJCOPY=objcopy
 
+QEMU=qemu-system-x86_64
+
 all: boot.img
 
 boot.o: boot.S
@@ -20,6 +22,8 @@ boot.img: boot.bin
 	# seek : skip # of blocks at output
 	dd if=/dev/zero of=boot.img skip=0 seek=1 bs=512 count=2879
 
+start:
+	$(QEMU) -m 128 -smp 1 -hda boot.img -boot order=cd 
 
 clean:
 	rm -rf boot.o boot.elf boot.bin boot.img
