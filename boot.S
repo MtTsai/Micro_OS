@@ -2,7 +2,7 @@
 
 .text
 	mov		%cs, %ax
-	mov		%ax, %ds
+	mov		%ax, %ds	# Here still work when data segment doesn't be set
 	mov		%ax, %es
 	call	DispStr		# call display string method
 	jmp		.			# infinite loop

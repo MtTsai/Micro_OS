@@ -13,8 +13,9 @@ boot.o: boot.S
 boot.elf: boot.o
 	$(LD) boot.o -o boot.elf -e -c -T$(LDFILE)
 
-boot.bin: boot.elf
-	$(OBJCOPY) -R .pdr -R .comment -R.note -S -O binary boot.elf boot.bin
+boot.bin: boot.elf	
+	$(OBJCOPY) -O binary boot.elf boot.bin
+#	$(OBJCOPY) -R .pdr -R .comment -R.note -S -O binary boot.elf boot.bin
 
 boot.img: boot.bin
 	dd if=boot.bin of=boot.img bs=512 count=1
